@@ -9,7 +9,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Sign the PDF
         id: sign_pdf
-        uses: moritzwagner/pdf-signer-action@0.2
+        uses: moritzwagner/pdf-signer-action@0.2.1
         with:
           pdf_file: 'unsigned.pdf'
           certificate: ${{ secrets.CERTIFICATE }}
