@@ -1,0 +1,21 @@
+name: Sign PDF
+on: [push]
+
+jobs:
+  sign:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Sign the PDF
+        id: sign_pdf
+        uses: moritzwagner/pdf-signer-action@v1
+        with:
+          pdf_file: 'unsigned.pdf'
+          certificate: ${{ secrets.CERTIFICATE }}
+          cert_password: ${{ secrets.CERT_PASSWORD }}
+      - name: Upload signed PDF
+        uses: actions/upload-artifact@v2
+        with:
+          name: signed-pdf
+          path: ${{ steps.sign_pdf.outputs.signed_pdf }}

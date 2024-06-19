@@ -1,0 +1,22 @@
+name: 'PDF Signer'
+description: 'A GitHub Action to sign a PDF file'
+inputs:
+  pdf_file:
+    description: 'The PDF file to be signed'
+    required: true
+  certificate:
+    description: 'The base64 encoded certificate as base64 encoded string'
+    required: true
+  cert_password:
+    description: 'The password for the certificate'
+    required: true
+outputs:
+  signed_pdf:
+    description: 'The path to the signed PDF file'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.pdf_file }}
+    - ${{ inputs.certificate }}
+    - ${{ inputs.cert_password }}
